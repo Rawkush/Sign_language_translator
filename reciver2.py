@@ -19,7 +19,6 @@ sys.path.insert(0, dir_path+"/Modules")
 import FaceEliminator
 
 # Following modules are used specifically for Gesture recognition
-sys.path.insert(0, dir_path+"/Gesture_Modules")
 
 currentModuleName = __file__.split(os.path.sep)[-1]
 print('current modelu name \n',currentModuleName)
@@ -69,11 +68,9 @@ port = int(input("Enter port no: "))
 print(ni.interfaces())    
 ni.ifaddresses('wlp1s0')
 ipAddr = ni.ifaddresses('wlp1s0')[ni.AF_INET][0]['addr']
-
-
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 if socketTimeOutEnable:
-    s.settimeout(20)
+    s.settimeout(20)   
 print("TCP Socket successfully created")
 s.bind(('', port))
 print("TCP Socket binded to %s: %s" %(ipAddr,port))
@@ -85,13 +82,8 @@ if socketTimeOutEnable:
     s.settimeout(10)
 
 
-
-
-
-
 while True:
     
- 
     noOfFramesCollected += 1
     if displayWindows:
         utils.displayTextOnWindow("Frame No",str(noOfFramesCollected))
@@ -160,7 +152,8 @@ while True:
     if displayWindows:
         cv2.imshow("Originl Img",img_np)
 
- 
+
+# contour of hand is useless delete k rna h isko 
     handFound, hand, contours_of_hand = utils.get_my_hand(mask1)
 
     if recognitionMode == "SIGN":
