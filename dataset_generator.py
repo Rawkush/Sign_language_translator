@@ -71,10 +71,14 @@ def read_from_folder(dir_):
             temp_img = cv2.imread(img_dir + '/' + folder + '/' + image)
             mask1 = segment(temp_img)
             handFound, hand, contours_of_hand = utils.get_my_hand(mask1)
+
+            print(hand.shape)
+            
+            
             if(handFound):
                 cv2.imwrite( dataset_dir + folder + '/' +image ,hand)
             
-            
+            break
             
             
 read_from_folder('Digits/')

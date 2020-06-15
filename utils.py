@@ -17,7 +17,6 @@ minModality = int(maxQueueSize/2)   # This is the minimum number of times a sign
 def get_my_hand(image_skin_mask):
     """
     ### Hand extractor
-
     __DO NOT INCLUDE YOUR FACE IN THE `image_skin_mask`__
     Provide an image where skin areas are represented by white and black otherwise.
     This function does the hardwork of finding your hand area in the image.
@@ -43,7 +42,6 @@ def get_my_hand(image_skin_mask):
     hand = image_skin_mask[y:y+h,x:x+w]
 
     return [ True, hand, contours[ci] ]
-
 
 
 
