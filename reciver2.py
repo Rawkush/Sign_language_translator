@@ -56,11 +56,6 @@ if recognitionMode == "SIGN":
 else:
     print("video mode not developed yet")
 
-def port_initializer():
-    global port
-    port = int(port_entry.get())
-    opening_window.destroy()
-
 
 port = int(input("Enter port no: "))
 
@@ -163,6 +158,7 @@ while True:
                 
             features = utils.extract_features(hand, gridSize)
             pred = utils.predictSign(classifier,features)
+            print(pred)
         else:
             pred = -1
         utils.addToQueue(pred)
@@ -204,10 +200,3 @@ s.close()
 cv2.destroyAllWindows()
 
 
-
-
-def cleaners():
-    s.close()
-    cv2.destroyAllWindows()
-
-atexit.register(cleaners)

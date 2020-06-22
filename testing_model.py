@@ -13,6 +13,8 @@ import socket
 import atexit
 import struct
 import sys
+import matplotlib.pyplot as plt
+
 import netifaces as ni
 import os
 import numpy as np
@@ -22,21 +24,23 @@ from imutils import face_utils
 import pickle
 dir_path = os.path.dirname(os.path.realpath(__file__))
 print('dir path is \n ', dir_path)
-import utils
 sys.path.insert(0, dir_path+"/Modules")
+sys.path.insert(0, dir_path)
+import utils
 import FaceEliminator
 from keras.preprocessing import image
 # Following modules are used specifically for Gesture recognition
 
 currentModuleName = __file__.split(os.path.sep)[-1]
-print('current modelu name \n',currentModuleName)
+print('current module name \n',currentModuleName)
 
 
 from tensorflow import keras
-model = keras.models.load_model('/home/aarav/Desktop/MajorProject/Models/my_model.h5')
+model = keras.models.load_model('/home/aarav/Desktop/MajorProject/Models/m.h5')
 
-test_image = cv2.imread('/home/aarav/Desktop/MajorProject/Dataset/Digits/7/1.png')
+test_image = cv2.imread('/home/aarav/Desktop/MajorProject/Dataset/Letters/a/100.png')
 
+#test_image = cv2.imread('/home/aarav/Desktop/2.jpeg')
 
 
 gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
@@ -46,3 +50,4 @@ hand=hand/255
 img = image.img_to_array(hand)
 img = np.expand_dims(img, axis = 0)
 pred= model.predict_classes(img)
+print(pred)
