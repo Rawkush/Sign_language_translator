@@ -128,8 +128,7 @@ while True:
             if pred == "2":
                 pred = "2 / v"
             op1 = pred+"\r\n"
-
-    
+   
 
     if recognitionMode =="SIGN":
         client.send(op1.encode('ascii'))
@@ -138,9 +137,6 @@ while True:
     k = cv2.waitKey(10)
     if k == 'q':
         break
-    
-    
-
 
 print('Stopped TCP server of port: '+str(port))
 print(recognitionMode+" recognition stopped")
