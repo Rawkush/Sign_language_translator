@@ -38,9 +38,9 @@ print('current module name \n',currentModuleName)
 from tensorflow import keras
 model = keras.models.load_model('/home/aarav/Desktop/MajorProject/Models/m.h5')
 
-test_image = cv2.imread('/home/aarav/Desktop/MajorProject/Dataset/Letters/a/100.png')
+#test_image = cv2.imread('/home/aarav/Desktop/MajorProject/Dataset/Letters/a/100.png')
 
-#test_image = cv2.imread('/home/aarav/Desktop/2.jpeg')
+test_image = cv2.imread('/home/aarav/Desktop/1.png')
 
 
 gray = cv2.cvtColor(test_image, cv2.COLOR_BGR2GRAY)
@@ -50,4 +50,5 @@ hand=hand/255
 img = image.img_to_array(hand)
 img = np.expand_dims(img, axis = 0)
 pred= model.predict_classes(img)
+#l= max(pred[0])
 print(pred)

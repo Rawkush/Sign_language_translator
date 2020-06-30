@@ -36,8 +36,12 @@ def predictSign(img):
     img = np.expand_dims(img, axis = 0)
     img.astype('float32')
     img=img/255.0
-    pred= model.predict_classes(img)
-    return utils.getSign(pred[0])
+    pred= model.predict(img)
+    maxProb= max(pred[0])  
+    if maxProb>0.8:
+        p=np.argmax(pred, axis=1)
+        return utils.getSign(p)
+    return -1 
 
 
 socketTimeOutEnable = False
