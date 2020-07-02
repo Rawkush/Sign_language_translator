@@ -70,6 +70,7 @@ def read_from_folder(dir_):
                 continue
             temp_img = cv2.imread(img_dir + '/' + folder + '/' + image)
             mask1 = segment(temp_img)
+            
             handFound, hand, contours_of_hand = utils.get_my_hand(mask1)
 
             print(hand.shape)

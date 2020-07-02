@@ -21,15 +21,20 @@ def getSign(inp):
         return labels_dict[str(inp)]
     
     
-def get_my_hand(image_skin_mask):
-    """
-    ### Hand extractor
-    __DO NOT INCLUDE YOUR FACE IN THE `image_skin_mask`__
-    Provide an image where skin areas are represented by white and black otherwise.
-    This function does the hardwork of finding your hand area in the image.
-    Returns: *(image)* Your hand, *(hand_contour)*.
-    """
-    _,contours,_ = cv2.findContours(image_skin_mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+def get_my_hand(hand_seg_img, mask):
+   
+    '''
+        hand_seg_img >  its coloured segmented image of hand
+        mask >   black and white representation of hand
+        
+    '''
+      
+    mask1=cv2.cvtColor(mask,cv2.COLOR_GRAY2BGR)#change mask to a 3 channel image 
+    mask_out=cv2.subtract(mask1,hand_seg_img)
+    fmask=cv2.subtract(mask1,mask_out)
+    
+    #finding contour using mask
+    _,contours,_ = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     length = len(contours)
     maxArea = -1
     ci = -1
@@ -46,9 +51,8 @@ def get_my_hand(image_skin_mask):
     # hand = np.zeros((image_skin_mask.shape[1], image_skin_mask.shape[0], 1), np.uint8)
     # cv2.drawContours(hand, contours, ci, 255, cv2.FILLED)
     # _,hand = cv2.threshold(hand[y:y+h,x:x+w], 127,255,0)
-    hand = image_skin_mask[y:y+h,x:x+w]
-
-    return [ True, hand, contours[ci] ]
+    hand_contour = fmask[y:y+h,x:x+w]
+    return [ True, hand_contour, contours[ci] ]
 
 
 # not needed now can be deleted
